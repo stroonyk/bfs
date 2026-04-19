@@ -1,0 +1,53 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: lightyellow;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size:100%;
+  line-height:1.2;
+  color: #333333;
+  }
+
+h1{
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 7px;
+  font-size: 1em;
+  color: blue;
+  font-style: italic
+  }
+  
+h2{
+  margin: 0px;
+  padding: 0px;
+  font-size: 0.75em;
+  color: blue;
+  font-style: italic
+  }
+
+ul{
+  margin: 0px 0px 0px 1em;
+  padding: 0px;
+  position: relative;
+  list-style: none;
+  font-size: 0.75em;
+  }
+  
+li{
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  }
+  
+
+p{
+  font-size: 0.75em;
+  }
+  
+
+a{
+  font-style:italic;
+  }
+
+a:hover{
+  text-decoration: none;
+  }

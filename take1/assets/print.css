@@ -1,0 +1,66 @@
+body{
+	background-color: #ffffff;
+  color: #000000;
+  font-family: Arial, sans-serif;
+  widows: 5;
+  orphans: 10;
+  }
+
+/*--Items to not print--*/  
+#logo{
+	display: none;
+  }
+  
+#navigation{
+	display: none;
+  }
+  
+#notice_board{
+  display: none;
+  }
+  
+img{
+	display: none;
+  } 
+  
+.skiplink{
+	display: none;
+  }
+  
+.hide{
+	display: none;
+  }
+   
+.clear_print{
+	display: none; /*--General Purpose "Don't Print"--*/
+  }
+/*--Content Control--*/
+h1{
+	font-family: Arial, sans-serif;
+  font-size: 1.3em;
+  }
+  
+h2{
+	font-family: Arial, sans-serif;
+  font-size: 1.1em;
+  }
+  
+h3{
+	font-family: Arial, sans-serif;
+  font-size: 1.0em;
+  }
+  
+#content a:link:after{
+   content: " (" attr(href) ") "; /*--Displays full URL's in Mozilla browsers (not IE)--*/
+   }
+  
+/*--Footer control--*/  
+#footer{
+	font-family: Arial, sans-serif;
+  font-size: 0.7em;
+  text-align: center;
+  }   
+  
+#sub_footer{
+  display: none;
+  }

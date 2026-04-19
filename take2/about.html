@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Berkhamsted Film Society</title>
+    <meta name="description" content="The history of Berkhamsted Film Society, started in 1967 and thriving ever since.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link href="assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/images/bfs_logo.jpg" alt="Berkhamsted Film Society">
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programme.html">Programme</a></li>
+                    <li><a href="join.html">Joining</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                    <li><a href="reactions.html">Reactions</a></li>
+                </ul>
+            </nav>
+            <a href="https://www.instagram.com/berkofilm/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="assets/images/Instagram_logo_2016.svg.png" alt="Instagram">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-center page-content">
+            <h1>About Berkhamsted Film Society</h1>
+
+            <div class="venue-image">
+                <img src="assets/images/Civic_Centre.jpg" alt="Berkhamsted Civic Centre">
+                <p class="image-caption">The Civic Centre, Berkhamsted - our home since 1976</p>
+            </div>
+
+            <p>The Society was started in 1967 by a group of cine enthusiasts in the Berkhamsted area. It has been thriving ever since. The Society showed its first films on hired 16mm projectors to an opening membership of 127 at the Catholic Hall. The venue moved to the more comfortable surroundings of the Kings Arms Hall in 1969 and then to its present home at the Civic Centre in 1976.</p>
+
+            <p>The Society was presented the 1971 BFFS Film Society of the Year Award, the prize for which was a 16mm projector donated by the Rank Organisation. The surprise bonus was the loan for six-months of a video-cassette player, at that time a major breakthrough in technology.</p>
+
+            <p>In the early days there were no facilities to store loudspeakers and projectors at the venue and these had to be moved to and from Committee members' homes for every film night. Changing reels in the dark projection room was a tricky business, occasionally resulting in missed cues and coils of film all over the floor!</p>
+
+            <p>1996-97 was the Society's most popular year in terms of membership. All previous records were broken when 298 members signed up.</p>
+
+            <p>2002-3 saw a season of significant change as the distributors started to drop new films in 16mm format in favour of DVDs. In the face of declining availability, Berkhamsted Film Society made a decision to retire its 16mm projectors and opt for new digital technology and the new digital era kicked off in January 2003.</p>
+
+            <p>The society now has a state of the art HD digital projection system and Dolby surround sound. The projector is ceiling mounted and we project onto a large 16ft screen which produces high quality images.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Berkhamsted Film Society | <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+            <p>&copy; Berkhamsted Film Society. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

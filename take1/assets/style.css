@@ -1,0 +1,380 @@
+body {
+     margin: 0px;
+     padding: 0px;
+     background-color: #ffffff;
+     font-family: Arial, Verdana, Helvetica, sans-serif;
+     font-size: 100%;
+     line-height: 1.2;
+     color: #333333;
+}
+
+
+/* ----- LAYOUT ----- */
+
+#main {
+     margin: 0px;
+     padding: 0px;
+}
+
+#left {
+     width: 180px;
+     height: 550px;
+     position: absolute;
+     top: 0px;
+     left: 0px;
+     background: url('images/Nav_bg.gif') no-repeat top left #ffffff;
+}
+
+
+/* ----- NOTICE BOARD ----- */
+
+#notice_board {
+     width: 11em;
+     height: 35em;
+     margin: 100px 0px 20px 20px;
+     padding: 15px;
+     position: absolute;
+     top: 0px;
+     right: 0px;
+     border: solid #000066 3px;
+     background-color: #ffffe0;
+}
+
+
+/* ----- NAVIGATION ----- */
+
+#navigation {
+     margin-top: 150px;
+     width: 11em;
+}
+
+#navigation ul {
+     position: relative;
+     right: 15px;
+     list-style: none;
+}
+
+#navigation li {
+     margin-bottom: 6px;
+     padding-bottom: 6px;
+     border-bottom: 1px dashed #cccccc;
+}
+
+#navigation a {
+     width: 8.0em;
+     display: block;
+     background: url('images/spool_logo.gif') no-repeat right;
+     color: blue;
+     text-decoration: none;
+     font-style: italic;
+     font-weight: bold;
+}
+
+#navigation a:hover {
+     background: url('images/spool_logo.gif') no-repeat right;
+     color: #000066;
+     font-style: italic;
+     font-weight: bold;
+}
+
+
+/* ----- CONTENT ----- */
+
+#content {
+     margin: 10px 10em 10px 195px;
+     padding: 10px 0px 10px 0px;
+}
+
+#content th.red {
+     font-weight: bold;
+     color: #ff0000;
+     text-align: left;
+}
+
+#content td.red {
+     font-weight: bold;
+     color: #ff0000;
+     text-align: left;
+}
+
+#content p.captiontext {
+     text-align: center;
+     font-size: 0.7em;
+}
+
+#content p.endorcement {
+     text-align: center;
+     font-size: 1.0em;
+}
+
+#content p.banner {
+     font-size: 1.2em;
+     font-weight: bold;
+     text-align: center;
+}
+
+#content p.tiny {
+     font-size: 0.75em;
+     font-style: italic;
+     text-align: center;
+}
+
+#content p.lefttiny {
+     font-size: 0.75em;
+     font-style: italic;
+     text-align: left;
+}
+
+#content p.offerctr {
+     font-size: 1.4em;
+     text-align: center;
+     color: #ff0000;
+}
+
+#content p.offerleft {
+     font-size: 1.4em;
+     text-align: left;
+     color: #ff0000;
+}
+
+#content p.pageone {
+     margin-right: 5em;
+}
+
+#content h1.pageone {
+     margin-right: 90px;
+     text-align: center;
+}
+
+#content a.offer {
+     color: #ff0000;
+     font-style: italic;
+}
+
+#content a {
+     color: #000066;
+     font-weight: 600;
+}
+
+
+#content img {
+     margin: 3px 6px;
+     padding: 2px;
+     border: 1px solid #000066;
+}
+
+#content img.right {
+     margin-right: 0px;
+     float: right;
+}
+
+#content img.left {
+     margin-left: 0px;
+     float: left;
+}
+
+#content img.bottom {
+     margin-left: 10px;
+     padding: 0px;
+     vertical-align: text-bottom;
+}
+
+#content img.icon {
+     margin: 0px 4px -2px 4px;
+     padding: 0px;
+     border: none;
+}
+
+#content img.offer {
+     margin: 0px 4px -2px 4px;
+     padding: 0px;
+     border: none;
+     float: left
+}
+
+#content img.normal {
+     margin-left: 0px;
+     padding: 0px;
+     border: none;
+     float: left;
+     width: 700px;
+}
+
+
+/* ----- PROGRAM ----- */
+
+#program {
+     margin: 0px;
+     padding: 0px;
+     width: 100%;
+     font-size: 1.0em;
+     text-align: left;
+}
+
+#program p {
+     font-size: 1.0em;
+}
+
+#program table.blueTable {
+     border: 2px solid black;
+     background-color: #EEEEEE;
+     width: 100%;
+     text-align: left;
+     border-collapse: collapse;
+}
+
+#program table.blueTable td,
+table.blueTable th {
+     border: 1px solid black;
+     padding: 2px 8px;
+}
+
+#program table.blueTable tbody td {
+     font-size: 1em;
+}
+
+#program table.blueTable tr:nth-child(even) {
+     background: #A3CCCC;
+     background: linear-gradient(to bottom, #EEEEEE 0%, #A3CCCC 100%);
+}
+
+#program table.blueTable thead th {
+     font-size: 1.3em;
+     font-weight: bold;
+     background: #A3CCCC;
+     text-align: center;
+     border-bottom: 2px solid black;
+}
+
+#program table.blueTable thead th:first-child {
+     border-left: none;
+}
+
+#program table.blueTable caption {
+     font-size: 1.5em;
+     padding: 3px;
+     font-weight: bold;
+     background: #A3CCCC;
+     border-left: 2px solid black;
+     border-top: 2px solid black;
+     border-right: 2px solid black;
+     border-bottom: none;
+}
+
+#join table.tjoin {
+     border: 2px solid black;
+     background-color: #eeeeee;
+     width: 30%;
+     text-align: left;
+     border-collapse: collapse;
+}
+
+#join table.tjoin td,
+table.tjoin th {
+     border: 1px solid black;
+     padding: 2px 8px;
+}
+
+#join table.tjoin tbody td {
+     font-size: 1em;
+}
+
+#join table.tjoin td:nth-child(1) {
+     background: #A3CCCC;
+     font-weight: bold;
+}
+
+#join table.tjoin thead th {
+     font-size: 1.3em;
+     font-weight: bold;
+     background: #A3CCCC;
+     text-align: left;
+     border-bottom: 2px solid black;
+}
+
+#join table.tjoin thead th:first-child {
+     border-left: none;
+}
+
+#join table.tjoin caption {
+     font-size: 1.3em;
+     padding: 3px;
+     font-weight: bold;
+     background: #A3CCCC;
+     border-left: 2px solid black;
+     border-top: 2px solid black;
+     border-right: 2px solid black;
+     border-bottom: none;
+}
+
+
+/* ----- FOOTER ----- */
+
+#footer {
+     margin: 0px 15em 0px 200px;
+     padding-bottom: 8px;
+     border-top: 1px dashed #000066;
+     font-size: 0.7em;
+     text-align: center;
+}
+
+#footer ul {
+     margin-left: 0px;
+     padding-left: 0px;
+     list-style: none;
+}
+
+#footer li {
+     padding: 0px 5px 0px 5px;
+     display: inline;
+}
+
+address {
+     display: inline;
+     font-style: normal;
+}
+
+
+/* ----- GENERAL ----- */
+
+h1 {
+     font-size: 2.0em;
+     color: blue;
+     font-style: italic;
+}
+
+h2 {
+     font-size: 1.4em;
+}
+
+h3 {
+     font-size: 1.2em;
+}
+
+p {
+     font-size: 0.95em;
+}
+
+a {
+     color: #000066;
+     font-style: italic;
+}
+
+a:hover {
+     text-decoration: none;
+}
+
+ul {
+     position: relative;
+     right: 15px;
+     list-style: none;
+}
+
+li {
+     margin-bottom: 6px;
+     padding-bottom: 6px;
+}
+
+img {
+     border: none;
+}

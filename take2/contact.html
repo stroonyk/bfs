@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Berkhamsted Film Society</title>
+    <meta name="description" content="Contact Berkhamsted Film Society for enquiries about membership and film screenings.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link href="assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/images/bfs_logo.jpg" alt="Berkhamsted Film Society">
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programme.html">Programme</a></li>
+                    <li><a href="join.html">Joining</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                    <li><a href="reactions.html">Reactions</a></li>
+                </ul>
+            </nav>
+            <a href="https://www.instagram.com/berkofilm/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="assets/images/Instagram_logo_2016.svg.png" alt="Instagram">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-center page-content">
+            <h1>Contact Berkhamsted Film Society</h1>
+
+            <p>The Film Society can be contacted by sending an email to <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+
+            <p>For subscription enquiries please write to:</p>
+
+            <address class="membership-address">
+                Joanna Dugher,<br>
+                Membership Secretary,<br>
+                Berkhamsted Film Society,<br>
+                c/o 11 Admiral Way,<br>
+                Berkhamsted,<br>
+                Herts, HP4 1TE<br><br>
+                Tel 07795148491<br>
+            </address>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Berkhamsted Film Society | <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+            <p>&copy; Berkhamsted Film Society. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

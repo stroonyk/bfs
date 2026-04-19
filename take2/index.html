@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkhamsted Film Society</title>
+    <meta name="description" content="Berkhamsted Film Society, enjoying the cinema for people in Berkhamsted, Herts. We run about 17 films a year, in the Civic Centre At Berkhamsted">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link href="assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/images/bfs_logo.jpg" alt="Berkhamsted Film Society">
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="programme.html">Programme</a></li>
+                    <li><a href="join.html">Joining</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                    <li><a href="reactions.html">Reactions</a></li>
+                </ul>
+            </nav>
+            <a href="https://www.instagram.com/berkofilm/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="assets/images/Instagram_logo_2016.svg.png" alt="Instagram">
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-banner">
+            <img src="assets/images/banner.png" alt="Classic Movie Posters">
+        </div>
+        <h1>Welcome to Berkhamsted Film Society</h1>
+    </section>
+
+    <main class="container main-with-sidebar">
+        <section class="content-center">
+            <div class="chairman-message">
+                <img src="assets/images/iandavies.jpg" alt="Ian Davies, Chairman" class="chairman-photo">
+                <p>Welcome: As Chairman of Berkhamsted Film Society I would like to tell you a little about who we are and what we do. We are an active and friendly society with around 200 members. We meet in the Civic Centre, Berkhamsted and screen about 15 films a season. Most of the films are screened for two nights running to give people a greater opportunity to come along.</p>
+            </div>
+
+            <div class="civic-section">
+                <img src="assets/images/civic.jpg" alt="Civic Centre, Berkhamsted" class="civic-photo">
+                <p>We start the season with a welcoming glass of wine and at Christmas celebrate with wine and mince pies. We finish each season with a Film Party where members have a chance to enjoy light refreshments with a film, and a Film Quiz or similar entertainment afterwards.</p>
+            </div>
+
+            <p>We project using a modern digital projection and Dolby surround sound system. Our projector is ceiling mounted and we project onto a large 5 metre wide screen which produces a high quality image. The Hall is equipped with a hearing loop and has wheelchair access.</p>
+
+            <p>We screen a wide selection of English-language and Foreign-language (sub-titled) films across a range of genres, from recent main stream releases to art house films. Films are selected by our Society committee and include suggestions from members. Go to the <a href="programme.html">Programme page</a> for further details.</p>
+
+            <p class="signature"><i><b>Ian Davies, Chairman</b></i></p>
+
+            <p class="banner">New Members Always Welcome (Non-members can pay £7 each at the desk on film nights)<br>All film screenings start at 8:00pm</p>
+
+            <p class="arts-trust">Berkhamsted Film Society is a member of the <a href="http://www.berkhamstedartstrust.org.uk/" target="_blank" rel="noopener noreferrer">Berkhamsted Arts Trust</a></p>
+        </section>
+
+        <aside class="notice-board">
+            <h3>2025/2026 Season</h3>
+            <h4>A summary of films to be screened this season:</h4>
+            <ul>
+                <li>Conclave</li>
+                <li>The Salt Path</li>
+                <li>My Favourite Cake</li>
+                <li>Mr. Burton</li>
+                <li>All We Imagine As Light</li>
+                <li>From Hilde With Love</li>
+                <li>The Tasting</li>
+                <li>The Critic</li>
+                <li>Juror #2</li>
+                <li>Maria</li>
+                <li>Oh My Goodness!</li>
+                <li>Van Gogh: Poets and Lovers</li>
+                <li>Girls Will Be Girls</li>
+                <li>I'm Still Here</li>
+                <li>Vermiglio</li>
+            </ul>
+            <p>Go to the <a href="programme.html">Programme page</a> for further details.</p>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Berkhamsted Film Society | <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+            <p>&copy; Berkhamsted Film Society. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

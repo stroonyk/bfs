@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links - Berkhamsted Film Society</title>
+    <meta name="description" content="Useful links to film resources and organizations related to Berkhamsted Film Society.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link href="assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/images/bfs_logo.jpg" alt="Berkhamsted Film Society">
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programme.html">Programme</a></li>
+                    <li><a href="join.html">Joining</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html" class="active">Links</a></li>
+                    <li><a href="reactions.html">Reactions</a></li>
+                </ul>
+            </nav>
+            <a href="https://www.instagram.com/berkofilm/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="assets/images/Instagram_logo_2016.svg.png" alt="Instagram">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-center page-content">
+            <h1>Links to External Sites</h1>
+
+            <p>The Society is a Member of the <a href="http://www.berkhamstedartstrust.org.uk/" target="_blank" rel="noopener noreferrer">Berkhamsted Arts Trust</a></p>
+
+            <p>Although we hand out to members and guests on the evening a short critique of the films we screen, we are often asked for more details about the films we show. You may find the following Links useful sources of further information about the films in our programme or films in general.</p>
+
+            <ul class="links-list">
+                <li>
+                    <a href="http://www.bfi.org.uk/sightandsound" target="_blank" rel="noopener noreferrer">British Film Institute</a>
+                </li>
+                <li>
+                    <a href="https://imdb.com/" target="_blank" rel="noopener noreferrer">Internet Movie Database</a>
+                </li>
+                <li>
+                    <a href="https://www.rottentomatoes.com/" target="_blank" rel="noopener noreferrer">Rotten Tomatoes</a>
+                </li>
+                <li>
+                    <a href="https://www.empireonline.com/movies/reviews/" target="_blank" rel="noopener noreferrer">Empire Reviews</a>
+                </li>
+                <li>
+                    <a href="http://www.findanyfilm.com/" target="_blank" rel="noopener noreferrer">Find Any Film</a>
+                </li>
+                <li>
+                    <a href="https://player.bfi.org.uk/rentals/collection/cinema-for-all-community-cinema" target="_blank" rel="noopener noreferrer">BFI Cinema For All</a>
+                </li>
+            </ul>
+
+            <p class="disclaimer"><i>The Society is not responsible for and does not endorse the contents or use of these websites. We cannot be held responsible for the content of those websites or their privacy practices.</i></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Berkhamsted Film Society | <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+            <p>&copy; Berkhamsted Film Society. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

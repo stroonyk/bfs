@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joining - Berkhamsted Film Society</title>
+    <meta name="description" content="Join Berkhamsted Film Society. Annual membership gives free admission to all our films for the season.">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link href="assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/images/bfs_logo.jpg" alt="Berkhamsted Film Society">
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programme.html">Programme</a></li>
+                    <li><a href="join.html" class="active">Joining</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="links.html">Links</a></li>
+                    <li><a href="reactions.html">Reactions</a></li>
+                </ul>
+            </nav>
+            <a href="https://www.instagram.com/berkofilm/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="assets/images/Instagram_logo_2016.svg.png" alt="Instagram">
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-center page-content">
+            <h1>Joining</h1>
+
+            <h2>Membership Subscriptions</h2>
+
+            <p>Thank you for your interest in Berkhamsted Film Society. Annual membership gives free admission to all our films for the season. The Supper Evening film is extra to the main programme and admission is by ticket.</p>
+
+            <p>Subscriptions are as follows:</p>
+
+            <table class="membership-table">
+                <caption>Annual Subscriptions - 2025/2026 Season</caption>
+                <tbody>
+                    <tr>
+                        <td>Member</td>
+                        <td>£50</td>
+                    </tr>
+                    <tr>
+                        <td>New Member</td>
+                        <td>£45</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>The preferred method of payment is by bank transfer. Further details may be found on the Membership Application Form. If it is not possible to make payment by bank transfer, please make cheques payable to "BERKHAMSTED FILM SOCIETY".</p>
+
+            <p>Please send your completed membership application form to:</p>
+
+            <address class="membership-address">
+                Joanna Dugher,<br>
+                Membership Secretary,<br>
+                Berkhamsted Film Society,<br>
+                11 Admiral Way,<br>
+                Berkhamsted,<br>
+                Herts, HP4 1TE<br>
+            </address>
+
+            <p>or scan/copy your form and email <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+
+            <p>Membership Cards may be collected at the desk on film night.</p>
+
+            <p class="download-link">
+                <img class="icon" src="assets/images/pdf.gif" width="16" height="16" alt="PDF">
+                <a href="pdf/newmember.pdf" title="Application Form">Membership Application Form</a> (200kb)
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Berkhamsted Film Society | <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+            <p>&copy; Berkhamsted Film Society. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
