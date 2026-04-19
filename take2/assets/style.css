@@ -1082,7 +1082,7 @@ footer a:hover {
 
 .rating-row {
     display: grid;
-    grid-template-columns: 80px 1fr 100px;
+    grid-template-columns: 70px 1fr 60px;
     gap: 10px;
     align-items: center;
 }
