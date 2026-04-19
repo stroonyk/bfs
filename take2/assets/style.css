@@ -503,7 +503,7 @@ footer a:hover {
 
 .page-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 40px;
     flex-wrap: wrap;
