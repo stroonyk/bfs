@@ -50,6 +50,7 @@
 
         // Fetch and display reactions
         async function loadReactions(season) {
+            return new Promise(async (resolve, reject) => {
             if (isLoading) return;
             isLoading = true;
 
@@ -147,11 +148,11 @@
                         // Track best and worst
                         if (overallRating > bestRating) {
                             bestRating = overallRating;
-                            bestFilm = { title: reaction.title, rating: overallRating };
+                            bestFilm = { title: reaction.title, rating: overallRating, image: reaction.image };
                         }
                         if (overallRating < worstRating) {
                             worstRating = overallRating;
-                            worstFilm = { title: reaction.title, rating: overallRating };
+                            worstFilm = { title: reaction.title, rating: overallRating, image: reaction.image };
                         }
 
                         const card = createReactionCard(reaction);
@@ -175,21 +176,54 @@
                     document.getElementById('best-film-rating').textContent = bestFilm.rating + '%';
                     document.getElementById('worst-film-title').textContent = worstFilm.title;
                     document.getElementById('worst-film-rating').textContent = worstFilm.rating + '%';
+
+                    // Add background images
+                    const bestCard = document.querySelector('.best-worst-card.best');
+                    const worstCard = document.querySelector('.best-worst-card.worst');
+
+                    if (bestFilm.image && bestCard) {
+                        bestCard.style.backgroundImage = `url('assets/images/${seasonConfig.imageFolder}/${bestFilm.image}')`;
+                    }
+                    if (worstFilm.image && worstCard) {
+                        worstCard.style.backgroundImage = `url('assets/images/${seasonConfig.imageFolder}/${worstFilm.image}')`;
+                    }
+
+                    // Trigger shudder and confetti after 2 seconds
+                    setTimeout(() => {
+                        if (bestCard) {
+                            // Add shudder animation
+                            bestCard.classList.add('shudder');
+
+                            // Remove shudder class after animation
+                            setTimeout(() => {
+                                bestCard.classList.remove('shudder');
+                            }, 600);
+
+                            // Trigger confetti explosion mid-shudder
+                            setTimeout(() => {
+                                triggerConfetti();
+                            }, 300);
+                        }
+                    }, 2000);
                 }
 
             } catch (error) {
                 console.error('Error loading reactions:', error);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
+                reject(error);
             } finally {
                 isLoading = false;
+                resolve();
             }
+            });
         }
 
         // Create a reaction card
         function createReactionCard(reaction) {
             const card = document.createElement('div');
             card.className = 'reaction-card';
+            card.id = reaction.title.replace(/\s+/g, '-').toLowerCase();
 
             const total = reaction.excellent + reaction.good + reaction.fair + reaction.poor + reaction.awful;
 
@@ -247,6 +281,85 @@
             return card;
         }
 
+        // Wedding confetti function
+        function triggerConfetti() {
+            const bestCard = document.querySelector('.best-worst-card.best');
+            if (!bestCard) return;
+
+            const colors = ['#FFD700', '#FF69B4', '#FFC0CB', '#87CEEB', '#98FB98', '#DDA0DD', '#F0E68C', '#FFB6C1', '#E6E6FA', '#FFDAB9'];
+            const confettiCount = 200;
+            const shapes = ['rect', 'circle', 'triangle'];
+
+            const rect = bestCard.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+                    // Different shapes
+                    if (shape === 'circle') {
+                        confetti.style.borderRadius = '50%';
+                        confetti.style.width = '8px';
+                        confetti.style.height = '8px';
+                    } else if (shape === 'triangle') {
+                        confetti.style.width = '0';
+                        confetti.style.height = '0';
+                        confetti.style.borderLeft = '5px solid transparent';
+                        confetti.style.borderRight = '5px solid transparent';
+                        confetti.style.borderBottom = `10px solid ${color}`;
+                        confetti.style.background = 'transparent';
+                    } else {
+                        confetti.style.background = color;
+                        confetti.style.width = (6 + Math.random() * 8) + 'px';
+                        confetti.style.height = (10 + Math.random() * 15) + 'px';
+                    }
+
+                    if (shape !== 'triangle') {
+                        confetti.style.background = color;
+                    }
+
+                    // Start from center of card
+                    confetti.style.left = centerX + 'px';
+                    confetti.style.top = centerY + 'px';
+
+                    // Physics: burst out then fall with gravity
+                    const angle = Math.random() * Math.PI * 2; // Random direction
+                    const velocity = 80 + Math.random() * 120; // Initial burst velocity
+                    const horizontalSpeed = Math.cos(angle) * velocity;
+
+                    // Initial upward burst (negative = up)
+                    const upwardBurst = -100 - Math.random() * 150;
+
+                    // Gravity pulls it down much more
+                    const fallDistance = 300 + Math.random() * 200;
+
+                    const duration = 2.5 + Math.random() * 1;
+
+                    confetti.style.setProperty('--tx', horizontalSpeed + 'px');
+                    confetti.style.setProperty('--ty-up', upwardBurst + 'px'); // Goes up first
+                    confetti.style.setProperty('--ty-down', fallDistance + 'px'); // Then gravity takes over
+                    confetti.style.setProperty('--rotation', (360 + Math.random() * 1080) + 'deg');
+                    confetti.style.setProperty('--duration', duration + 's');
+
+                    bestCard.appendChild(confetti);
+
+                    setTimeout(() => {
+                        confetti.classList.add('animate');
+                    }, 10);
+
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, duration * 1000 + 500);
+                }, Math.random() * 400);
+            }
+        }
+
         // Hamburger menu
         const hamburger = document.getElementById('hamburger');
         const nav = document.getElementById('nav');
@@ -280,7 +393,22 @@
             seasonSelect.value = currentSeason;
 
             // Load reactions for initial season
-            loadReactions(currentSeason);
+            loadReactions(currentSeason).then(() => {
+                // Scroll to film if hash is in URL
+                if (window.location.hash) {
+                    const targetId = window.location.hash.substring(1);
+                    const targetCard = document.getElementById(targetId);
+                    if (targetCard) {
+                        setTimeout(() => {
+                            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            targetCard.style.outline = '3px solid #FFD700';
+                            setTimeout(() => {
+                                targetCard.style.outline = '';
+                            }, 2000);
+                        }, 500);
+                    }
+                }
+            });
 
             // Handle season change
             seasonSelect.addEventListener("change", (e) => {

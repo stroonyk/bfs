@@ -4,10 +4,12 @@
 const SEASONS = {
   "2026-2027": {
     sheetId: "1fSd1buNLplD0cQckUExRV4ODb-uk144iLuZq8tae8vc",
+    reactionsSheetId: "1gGzlsbLcCreHIi4SJEtFI1dulLZ5ZbphNiV5bWVZ-1c",
     imageFolder: "2627",
   },
   "2025-2026": {
     sheetId: "1VwKUYCRjdFuKsbI5qXw3ulOCmlJBe2nGIyyoa36sTpo",
+    reactionsSheetId: "1zgoxxY_lh7jzNhsrQJPGLTUMBmC9eULAizFpSXzWSoU",
     imageFolder: "2526",
   },
   "2024-2025": {
@@ -30,6 +32,42 @@ function getInitialSeason() {
   return seasonParam && SEASONS[seasonParam] ? seasonParam : "2025-2026";
 }
 
+// Fetch reactions data to get overall scores
+async function fetchReactionsScores(season) {
+  const seasonConfig = SEASONS[season];
+  if (!seasonConfig.reactionsSheetId) return {};
+
+  try {
+    const response = await fetch(`https://docs.google.com/spreadsheets/d/${seasonConfig.reactionsSheetId}/gviz/tq?tqx=out=json&headers=1`);
+    const text = await response.text();
+    const json = JSON.parse(text.substr(47).slice(0, -2));
+
+    const scoresMap = {};
+    json.table.rows.forEach(row => {
+      const cells = row.c;
+      if (cells && cells[1]) {
+        const title = cells[1].v;
+        const excellent = parseInt(cells[4]?.v) || 0;
+        const good = parseInt(cells[5]?.v) || 0;
+        const fair = parseInt(cells[6]?.v) || 0;
+        const poor = parseInt(cells[7]?.v) || 0;
+        const awful = parseInt(cells[8]?.v) || 0;
+
+        const total = excellent + good + fair + poor + awful;
+        if (total > 0) {
+          const weightedScore = (excellent * 1) + (good * 0.75) + (fair * 0.5) + (poor * 0.25);
+          const overallRating = Math.round((weightedScore / total) * 100);
+          scoresMap[title] = overallRating;
+        }
+      }
+    });
+    return scoresMap;
+  } catch (error) {
+    console.error('Error fetching reactions scores:', error);
+    return {};
+  }
+}
+
 // Fetch and display films
 async function loadFilms(season) {
   if (isLoading) return;
@@ -40,8 +78,13 @@ async function loadFilms(season) {
   const SHEET_URL = `https://docs.google.com/spreadsheets/d/${seasonConfig.sheetId}/gviz/tq?tqx=out:json&headers=1`;
 
   try {
-    const response = await fetch(SHEET_URL);
-    const text = await response.text();
+    // Fetch both programme and reactions data
+    const [programmeResponse, reactionsScores] = await Promise.all([
+      fetch(SHEET_URL),
+      fetchReactionsScores(currentSeason)
+    ]);
+
+    const text = await programmeResponse.text();
 
     // Parse the JSON response (Google returns JSONP, need to extract JSON)
     const json = JSON.parse(text.substr(47).slice(0, -2));
@@ -61,9 +104,10 @@ async function loadFilms(season) {
       // Skip if no data
       if (!cells || !cells[1] || !cells[1].v) return;
 
+      const title = cells[1]?.v || "";
       const film = {
         date: cells[0]?.v || "",
-        title: cells[1]?.v || "",
+        title: title,
         genre: cells[2]?.v || "",
         note: cells[3]?.v || "",
         description: cells[4]?.v || "",
@@ -72,6 +116,7 @@ async function loadFilms(season) {
         trailer: cells[7]?.v || "",
         rottenTomatoes: cells[8]?.v || "",
         rtScore: cells[9]?.v || "",
+        overallScore: reactionsScores[title] || null,
       };
 
       // Create film card
@@ -108,6 +153,11 @@ function createFilmCard(film) {
                     : film.rtScore
                       ? `<div class="rt-score ${parseInt(film.rtScore) < 60 ? "rotten" : "fresh"}">${parseInt(film.rtScore) < 60 ? "🤢" : "🍅"} ${film.rtScore}%</div>`
                       : ""
+                }
+                ${
+                  film.overallScore
+                    ? `<a href="reactions.html?season=${currentSeason}#${encodeURIComponent(film.title.replace(/\s+/g, '-').toLowerCase())}" class="bfs-score">🎬 ${film.overallScore}%</a>`
+                    : ""
                 }
             </div>
             <h3 class="film-title">${film.title}</h3>
