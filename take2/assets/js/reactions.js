@@ -267,6 +267,14 @@
         window.addEventListener('DOMContentLoaded', () => {
             const seasonSelect = document.getElementById("season-select");
 
+            // Populate dropdown from SEASONS config
+            Object.keys(SEASONS).forEach(seasonKey => {
+                const option = document.createElement("option");
+                option.value = seasonKey;
+                option.textContent = seasonKey.replace("-", "/");
+                seasonSelect.appendChild(option);
+            });
+
             // Set initial season
             currentSeason = getInitialSeason();
             seasonSelect.value = currentSeason;
