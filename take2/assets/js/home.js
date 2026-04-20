@@ -40,6 +40,8 @@ async function loadNextFilm() {
         trailer: cells[7]?.v || "",
         rottenTomatoes: cells[8]?.v || "",
         rtScore: cells[9]?.v || "",
+        imdbLink: cells[10]?.v || "",
+        imdbScore: cells[11]?.v || "",
       };
 
       // Only consider films with trailers
@@ -131,7 +133,36 @@ async function loadNextFilm() {
 
     // Display next film if found
     if (nextFilm) {
-      document.getElementById("next-film-name").textContent = nextFilm.title;
+      const titleElement = document.getElementById("next-film-name");
+      titleElement.textContent = nextFilm.title;
+
+      // Make title clickable - link to programme page with anchor
+      titleElement.style.cursor = "pointer";
+      titleElement.style.textDecoration = "underline";
+      titleElement.addEventListener("click", () => {
+        const filmSlug = nextFilm.title.replace(/\s+/g, '-').toLowerCase();
+        window.location.href = `programme.html?season=${CURRENT_SEASON}#${encodeURIComponent(filmSlug)}`;
+      });
+
+      // Add RT and IMDB badges
+      let badgesHtml = '';
+      if (nextFilm.rottenTomatoes) {
+        badgesHtml += `<a href="${nextFilm.rottenTomatoes}" target="_blank" rel="noopener noreferrer" class="rt-score ${nextFilm.rtScore && parseInt(nextFilm.rtScore) < 60 ? "rotten" : "fresh"}">${nextFilm.rtScore ? (parseInt(nextFilm.rtScore) < 60 ? "🤢" : "🍅") + " " + nextFilm.rtScore + "%" : "🍅"}</a>`;
+      } else if (nextFilm.rtScore) {
+        badgesHtml += `<div class="rt-score ${parseInt(nextFilm.rtScore) < 60 ? "rotten" : "fresh"}">${parseInt(nextFilm.rtScore) < 60 ? "🤢" : "🍅"} ${nextFilm.rtScore}%</div>`;
+      }
+
+      if (nextFilm.imdbScore && nextFilm.imdbLink) {
+        badgesHtml += `<a href="${nextFilm.imdbLink}" target="_blank" rel="noopener noreferrer" class="imdb-score">⭐ ${nextFilm.imdbScore}</a>`;
+      } else if (nextFilm.imdbScore) {
+        badgesHtml += `<div class="imdb-score">⭐ ${nextFilm.imdbScore}</div>`;
+      }
+
+      const badgesContainer = document.getElementById("next-film-badges");
+      if (badgesContainer && badgesHtml) {
+        badgesContainer.innerHTML = badgesHtml;
+      }
+
       document.getElementById("next-film-date").textContent = nextFilm.date;
       document.getElementById("next-film-description").textContent = nextFilm.description;
       document.getElementById("next-film-iframe").src = `https://www.youtube.com/embed/${nextFilm.trailer}`;

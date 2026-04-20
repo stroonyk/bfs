@@ -24,6 +24,7 @@ const SEASONS = {
 
 let currentSeason = "2025-2026";
 let isLoading = false;
+let allFilms = []; // Store all films for sorting
 
 // Get season from URL parameter or default to current
 function getInitialSeason() {
@@ -97,6 +98,9 @@ async function loadFilms(season) {
     const filmGrid = document.getElementById("film-grid");
     filmGrid.innerHTML = "";
 
+    // Reset allFilms array
+    allFilms = [];
+
     // Process each row (don't skip - the API already handles headers)
     rows.forEach((row) => {
       const cells = row.c;
@@ -116,13 +120,19 @@ async function loadFilms(season) {
         trailer: cells[7]?.v || "",
         rottenTomatoes: cells[8]?.v || "",
         rtScore: cells[9]?.v || "",
+        imdbLink: cells[10]?.v || "",
+        imdbScore: cells[11]?.v || "",
         overallScore: reactionsScores[title] || null,
       };
 
-      // Create film card
-      const card = createFilmCard(film);
-      filmGrid.appendChild(card);
+      allFilms.push(film);
     });
+
+    // Display films
+    displayFilms(allFilms);
+
+    // Show sort dropdown
+    document.getElementById("sort-container").style.display = "flex";
   } catch (error) {
     console.error("Error loading films:", error);
     document.getElementById("loading").style.display = "none";
@@ -132,10 +142,43 @@ async function loadFilms(season) {
   }
 }
 
+// Display films in the grid
+function displayFilms(films) {
+  const filmGrid = document.getElementById("film-grid");
+  filmGrid.innerHTML = "";
+
+  films.forEach((film) => {
+    const card = createFilmCard(film);
+    filmGrid.appendChild(card);
+  });
+}
+
+// Sort films
+function sortFilms(sortBy) {
+  let sortedFilms = [...allFilms];
+
+  if (sortBy === "score") {
+    // Sort by overall score (highest first), films without scores go to the end
+    sortedFilms.sort((a, b) => {
+      if (a.overallScore === null && b.overallScore === null) return 0;
+      if (a.overallScore === null) return 1;
+      if (b.overallScore === null) return -1;
+      return b.overallScore - a.overallScore;
+    });
+  }
+  // Default is date order (original order from spreadsheet)
+
+  displayFilms(sortedFilms);
+}
+
 // Create a film card element
 function createFilmCard(film) {
   const card = document.createElement("div");
   card.className = "film-card";
+
+  // Add ID for scroll anchor
+  const filmSlug = film.title.replace(/\s+/g, '-').toLowerCase();
+  card.id = filmSlug;
 
   const seasonConfig = SEASONS[currentSeason];
 
@@ -144,23 +187,34 @@ function createFilmCard(film) {
             <img src="assets/images/${seasonConfig.imageFolder}/${film.image}" alt="${film.title}" onerror="this.onerror=null; this.style.display='none';">
         </div>
         <div class="film-content">
-            <p class="film-date">${film.date}</p>
-            <div class="film-badges">
+            <h3 class="film-title">${film.title}</h3>
+            <div class="film-date-genre">
+                <p class="film-date">${film.date}</p>
                 <div class="film-genre">${film.genre}</div>
-                ${
-                  film.rtScore && film.rottenTomatoes
-                    ? `<a href="${film.rottenTomatoes}" target="_blank" rel="noopener noreferrer" class="rt-score ${parseInt(film.rtScore) < 60 ? "rotten" : "fresh"}">${parseInt(film.rtScore) < 60 ? "🤢" : "🍅"} ${film.rtScore}%</a>`
-                    : film.rtScore
-                      ? `<div class="rt-score ${parseInt(film.rtScore) < 60 ? "rotten" : "fresh"}">${parseInt(film.rtScore) < 60 ? "🤢" : "🍅"} ${film.rtScore}%</div>`
-                      : ""
-                }
+            </div>
+            <div class="film-badges">
+                <div class="badges-left">
+                    ${
+                      film.rottenTomatoes
+                        ? `<a href="${film.rottenTomatoes}" target="_blank" rel="noopener noreferrer" class="rt-score ${film.rtScore && parseInt(film.rtScore) < 60 ? "rotten" : "fresh"}">${film.rtScore ? (parseInt(film.rtScore) < 60 ? "🤢" : "🍅") + " " + film.rtScore + "%" : "🍅"}</a>`
+                        : film.rtScore
+                          ? `<div class="rt-score ${parseInt(film.rtScore) < 60 ? "rotten" : "fresh"}">${parseInt(film.rtScore) < 60 ? "🤢" : "🍅"} ${film.rtScore}%</div>`
+                          : ""
+                    }
+                    ${
+                      film.imdbScore && film.imdbLink
+                        ? `<a href="${film.imdbLink}" target="_blank" rel="noopener noreferrer" class="imdb-score">⭐ ${film.imdbScore}</a>`
+                        : film.imdbScore
+                          ? `<div class="imdb-score">⭐ ${film.imdbScore}</div>`
+                          : ""
+                    }
+                </div>
                 ${
                   film.overallScore
-                    ? `<a href="reactions.html?season=${currentSeason}#${encodeURIComponent(film.title.replace(/\s+/g, '-').toLowerCase())}" class="bfs-score">🎬 ${film.overallScore}%</a>`
+                    ? `<a href="reactions.html?season=${currentSeason}#${encodeURIComponent(film.title.replace(/\s+/g, '-').toLowerCase())}" class="bfs-score"><img src="assets/images/spool_logo.gif" alt="BFS" class="bfs-icon"> ${film.overallScore}%</a>`
                     : ""
                 }
             </div>
-            <h3 class="film-title">${film.title}</h3>
             ${film.note ? `<p class="film-note">${film.note}</p>` : ""}
             <p class="film-description">${film.description}</p>
             <p class="film-info">${film.info}</p>
@@ -239,6 +293,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // Clear grid and reload
     document.getElementById("film-grid").innerHTML = "";
     document.getElementById("loading").style.display = "block";
+    document.getElementById("sort-container").style.display = "none";
     loadFilms(newSeason);
   });
+
+  // Handle sort change
+  const sortSelect = document.getElementById("sort-select");
+  sortSelect.addEventListener("change", (e) => {
+    sortFilms(e.target.value);
+  });
+
+  // Handle hash navigation (scroll to film)
+  window.addEventListener('hashchange', scrollToFilm);
+  if (window.location.hash) {
+    setTimeout(scrollToFilm, 500);
+  }
 });
+
+// Scroll to film based on hash
+function scrollToFilm() {
+  if (window.location.hash) {
+    const filmId = decodeURIComponent(window.location.hash.substring(1));
+    const filmElement = document.getElementById(filmId);
+    if (filmElement) {
+      filmElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Highlight briefly
+      filmElement.style.outline = '3px solid #FFD700';
+      setTimeout(() => {
+        filmElement.style.outline = '';
+      }, 2000);
+    }
+  }
+}

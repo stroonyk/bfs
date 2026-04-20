@@ -36,6 +36,12 @@
             <li><a href="reactions.html">Reactions</a></li>
           </ul>
         </nav>
+        <button class="search-icon" id="search-icon" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
         <a
           href="https://www.instagram.com/berkofilm/"
           class="social-link"
@@ -51,6 +57,18 @@
       </div>
     </header>
 
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+      <div class="search-modal-content">
+        <button class="search-close" id="search-close">&times;</button>
+        <h2>Search Films</h2>
+        <div class="search-input-container">
+          <input type="text" id="search-input" placeholder="Search by film title..." />
+          <button id="search-button" class="search-button">Search</button>
+        </div>
+      </div>
+    </div>
+
     <section class="hero">
       <div class="hero-banner">
         <img src="assets/images/banner.png" alt="Classic Movie Posters" />
@@ -64,6 +82,7 @@
         <div class="next-film-content">
           <div class="next-film-info">
             <h3 id="next-film-name"></h3>
+            <div id="next-film-badges" style="margin: 10px 0; display: flex; gap: 10px; align-items: center;"></div>
             <p id="next-film-date"></p>
             <p id="next-film-description"></p>
           </div>
@@ -147,21 +166,21 @@
         <h3>2025/2026 Season</h3>
         <h4>A summary of films to be screened this season:</h4>
         <ul>
-          <li>Conclave</li>
-          <li>The Salt Path</li>
-          <li>My Favourite Cake</li>
-          <li>Mr. Burton</li>
-          <li>All We Imagine As Light</li>
-          <li>From Hilde With Love</li>
-          <li>The Tasting</li>
-          <li>The Critic</li>
-          <li>Juror #2</li>
-          <li>Maria</li>
-          <li>Oh My Goodness!</li>
-          <li>Van Gogh: Poets and Lovers</li>
-          <li>Girls Will Be Girls</li>
-          <li>I'm Still Here</li>
-          <li>Vermiglio</li>
+          <li><a href="programme.html?season=2025-2026#conclave">Conclave</a></li>
+          <li><a href="programme.html?season=2025-2026#the-salt-path">The Salt Path</a></li>
+          <li><a href="programme.html?season=2025-2026#my-favourite-cake">My Favourite Cake</a></li>
+          <li><a href="programme.html?season=2025-2026#mr.-burton">Mr. Burton</a></li>
+          <li><a href="programme.html?season=2025-2026#all-we-imagine-as-light">All We Imagine As Light</a></li>
+          <li><a href="programme.html?season=2025-2026#from-hilde-with-love">From Hilde With Love</a></li>
+          <li><a href="programme.html?season=2025-2026#the-tasting">The Tasting</a></li>
+          <li><a href="programme.html?season=2025-2026#the-critic">The Critic</a></li>
+          <li><a href="programme.html?season=2025-2026#juror-#2">Juror #2</a></li>
+          <li><a href="programme.html?season=2025-2026#maria">Maria</a></li>
+          <li><a href="programme.html?season=2025-2026#oh-my-goodness!">Oh My Goodness!</a></li>
+          <li><a href="programme.html?season=2025-2026#van-gogh:-poets-and-lovers">Van Gogh: Poets and Lovers</a></li>
+          <li><a href="programme.html?season=2025-2026#girls-will-be-girls">Girls Will Be Girls</a></li>
+          <li><a href="programme.html?season=2025-2026#i'm-still-here">I'm Still Here</a></li>
+          <li><a href="programme.html?season=2025-2026#vermiglio">Vermiglio</a></li>
         </ul>
         <p>
           Go to the <a href="programme.html">Programme page</a> for further
@@ -184,5 +203,6 @@
 
     <script src="assets/js/common.js"></script>
     <script src="assets/js/home.js"></script>
+    <script src="assets/js/search.js"></script>
   </body>
 </html>

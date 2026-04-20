@@ -36,6 +36,12 @@
             <li><a href="reactions.html">Reactions</a></li>
           </ul>
         </nav>
+        <button class="search-icon" id="search-icon" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
         <a
           href="https://www.instagram.com/berkofilm/"
           class="social-link"
@@ -50,6 +56,18 @@
         </a>
       </div>
     </header>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+      <div class="search-modal-content">
+        <button class="search-close" id="search-close">&times;</button>
+        <h2>Search Films</h2>
+        <div class="search-input-container">
+          <input type="text" id="search-input" placeholder="Search by film title..." />
+          <button id="search-button" class="search-button">Search</button>
+        </div>
+      </div>
+    </div>
 
     <main class="container">
       <section class="page-content programme-page">
@@ -66,6 +84,14 @@
         <div id="loading" class="loading">Loading films...</div>
         <div id="error" class="error" style="display: none">
           Unable to load films. Please try again later.
+        </div>
+
+        <div class="sort-selector" id="sort-container" style="display: none;">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select" class="season-dropdown">
+            <option value="date">Date</option>
+            <option value="score">Overall Score</option>
+          </select>
         </div>
 
         <div id="film-grid" class="film-grid"></div>
@@ -104,5 +130,6 @@
 
     <script src="assets/js/common.js"></script>
     <script src="assets/js/programme.js"></script>
+    <script src="assets/js/search.js"></script>
   </body>
 </html>

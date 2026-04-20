@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Berkhamsted Film Society</title>
-    <meta name="description" content="Contact Berkhamsted Film Society for enquiries about membership and film screenings.">
+    <title>Search Results - Berkhamsted Film Society</title>
+    <meta name="description" content="Search results for Berkhamsted Film Society films.">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link href="assets/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -25,7 +25,7 @@
                     <li><a href="programme.html">Programme</a></li>
                     <li><a href="join.html">Joining</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                     <li><a href="links.html">Links</a></li>
                     <li><a href="reactions.html">Reactions</a></li>
                 </ul>
@@ -55,22 +55,18 @@
     </div>
 
     <main class="container">
-        <section class="content-center page-content">
-            <h1>Contact Berkhamsted Film Society</h1>
+        <section class="page-content programme-page">
+            <h1>Search Results</h1>
+            <p id="search-query" class="search-query-text"></p>
 
-            <p>The Film Society can be contacted by sending an email to <a href="mailto:berkhamstedfilmsociety@gmail.com">berkhamstedfilmsociety@gmail.com</a></p>
+            <div id="search-loading" class="loading" style="display: none;">Searching...</div>
 
-            <p>For subscription enquiries please write to:</p>
+            <div id="search-results" class="film-grid"></div>
 
-            <address class="membership-address">
-                Joanna Dugher,<br>
-                Membership Secretary,<br>
-                Berkhamsted Film Society,<br>
-                c/o 11 Admiral Way,<br>
-                Berkhamsted,<br>
-                Herts, HP4 1TE<br><br>
-                Tel 07795148491<br>
-            </address>
+            <div id="no-results" class="no-results" style="display: none;">
+                <p>No films found matching your search.</p>
+                <button class="search-again-btn" onclick="document.getElementById('search-icon').click()">Search Again</button>
+            </div>
         </section>
     </main>
 
@@ -83,5 +79,6 @@
 
     <script src="assets/js/common.js"></script>
     <script src="assets/js/search.js"></script>
+    <script src="assets/js/search-results.js"></script>
 </body>
 </html>
