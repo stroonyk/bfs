@@ -124,11 +124,9 @@ async function loadNextFilm() {
       upcomingFilms.sort((a, b) => a.date - b.date);
       nextFilm = upcomingFilms[0].film;
       console.log("Next upcoming film:", nextFilm.title, "on", upcomingFilms[0].date);
-    } else if (filmsWithDates.length > 0) {
-      // No upcoming films, show most recent past film
-      filmsWithDates.sort((a, b) => b.date - a.date);
-      nextFilm = filmsWithDates[0].film;
-      console.log("No upcoming films, showing most recent:", nextFilm.title);
+    } else {
+      // No upcoming films - don't show the section
+      console.log("No upcoming films with trailers");
     }
 
     // Display next film if found
