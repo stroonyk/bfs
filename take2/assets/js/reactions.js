@@ -1,17 +1,3 @@
-        // Season configurations
-        const SEASONS = {
-            "2026-2027": {
-                reactionsSheetId: "1gGzlsbLcCreHIi4SJEtFI1dulLZ5ZbphNiV5bWVZ-1c",
-                programmeSheetId: "1fSd1buNLplD0cQckUExRV4ODb-uk144iLuZq8tae8vc",
-                imageFolder: "2627"
-            },
-            "2025-2026": {
-                reactionsSheetId: "1zgoxxY_lh7jzNhsrQJPGLTUMBmC9eULAizFpSXzWSoU",
-                programmeSheetId: "1VwKUYCRjdFuKsbI5qXw3ulOCmlJBe2nGIyyoa36sTpo",
-                imageFolder: "2526"
-            }
-        };
-
         let currentSeason = "2025-2026";
         let isLoading = false;
         let allReactions = []; // Store all reactions for sorting

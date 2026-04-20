@@ -26,7 +26,7 @@ async function executeSearch(query) {
     const searchTerm = query.toLowerCase().trim();
     const allResults = [];
 
-    for (const [seasonName, seasonConfig] of Object.entries(SEASONS_SEARCH)) {
+    for (const [seasonName, seasonConfig] of Object.entries(SEASONS)) {
         try {
             // Fetch programme and reactions data in parallel
             const [programmeResponse, reactionsScores] = await Promise.all([

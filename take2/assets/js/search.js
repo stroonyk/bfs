@@ -1,26 +1,5 @@
 // Search functionality across all seasons
 
-const SEASONS_SEARCH = {
-    "2026-2027": {
-        sheetId: "1fSd1buNLplD0cQckUExRV4ODb-uk144iLuZq8tae8vc",
-        reactionsSheetId: "1gGzlsbLcCreHIi4SJEtFI1dulLZ5ZbphNiV5bWVZ-1c",
-        imageFolder: "2627",
-    },
-    "2025-2026": {
-        sheetId: "1VwKUYCRjdFuKsbI5qXw3ulOCmlJBe2nGIyyoa36sTpo",
-        reactionsSheetId: "1zgoxxY_lh7jzNhsrQJPGLTUMBmC9eULAizFpSXzWSoU",
-        imageFolder: "2526",
-    },
-    "2024-2025": {
-        sheetId: "1VJVMMnPgKs6m5kBYegmKJu1d3yxtJ-xj3aNpzXhFvs0",
-        imageFolder: "2425",
-    },
-    "2023-2024": {
-        sheetId: "18AJTo4FOEAjtUuW15FLmUG0b5mTBeqKvgnXnmQPV-A0",
-        imageFolder: "2324",
-    },
-};
-
 // Open search modal
 document.getElementById('search-icon').addEventListener('click', () => {
     document.getElementById('search-modal').style.display = 'flex';
@@ -44,7 +23,7 @@ window.addEventListener('click', (e) => {
 
 // Fetch reactions scores for a season
 async function fetchReactionsScoresForSearch(season) {
-    const seasonConfig = SEASONS_SEARCH[season];
+    const seasonConfig = SEASONS[season];
     if (!seasonConfig.reactionsSheetId) return {};
 
     try {
