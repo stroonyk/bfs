@@ -130,9 +130,6 @@ async function loadFilms(season) {
 
     // Display films
     displayFilms(allFilms);
-
-    // Show sort dropdown
-    document.getElementById("sort-container").style.display = "flex";
   } catch (error) {
     console.error("Error loading films:", error);
     document.getElementById("loading").style.display = "none";
@@ -185,6 +182,12 @@ function createFilmCard(film) {
   card.innerHTML = `
         <div class="film-poster">
             <img src="assets/images/${seasonConfig.imageFolder}/${film.image}" alt="${film.title}" onerror="this.onerror=null; this.style.display='none';">
+            ${film.trailer ? `<div class="play-overlay" data-trailer="${film.trailer}" data-title="${film.title}">
+                <svg class="play-icon" viewBox="0 0 24 24" fill="white">
+                    <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.6)" stroke="white" stroke-width="1"/>
+                    <polygon points="10,8 17,12 10,16" fill="white"/>
+                </svg>
+            </div>` : ''}
         </div>
         <div class="film-content">
             <h3 class="film-title">${film.title}</h3>
@@ -218,16 +221,24 @@ function createFilmCard(film) {
             ${film.note ? `<p class="film-note">${film.note}</p>` : ""}
             <p class="film-description">${film.description}</p>
             <p class="film-info">${film.info}</p>
-            <div class="film-actions">
+            <!-- <div class="film-actions">
                 ${film.trailer ? `<button class="trailer-btn" data-trailer="${film.trailer}" data-title="${film.title}">▶ Watch Trailer</button>` : ""}
-            </div>
+            </div> -->
         </div>
     `;
 
-  // Add trailer button click handler
+  // Add trailer button click handler (commented out - now using play overlay)
+  // if (film.trailer) {
+  //   const trailerBtn = card.querySelector(".trailer-btn");
+  //   trailerBtn.addEventListener("click", () =>
+  //     openTrailerModal(film.trailer, film.title),
+  //   );
+  // }
+
+  // Add play overlay click handler
   if (film.trailer) {
-    const trailerBtn = card.querySelector(".trailer-btn");
-    trailerBtn.addEventListener("click", () =>
+    const playOverlay = card.querySelector(".play-overlay");
+    playOverlay.addEventListener("click", () =>
       openTrailerModal(film.trailer, film.title),
     );
   }
@@ -293,14 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Clear grid and reload
     document.getElementById("film-grid").innerHTML = "";
     document.getElementById("loading").style.display = "block";
-    document.getElementById("sort-container").style.display = "none";
     loadFilms(newSeason);
-  });
-
-  // Handle sort change
-  const sortSelect = document.getElementById("sort-select");
-  sortSelect.addEventListener("change", (e) => {
-    sortFilms(e.target.value);
   });
 
   // Handle hash navigation (scroll to film)

@@ -98,6 +98,12 @@ function createSearchResultCard(film) {
     card.innerHTML = `
         <div class="film-poster">
             <img src="assets/images/${film.imageFolder}/${film.image}" alt="${film.title}" onerror="this.onerror=null; this.style.display='none';">
+            ${film.trailer ? `<div class="play-overlay" data-trailer="${film.trailer}" data-title="${film.title}">
+                <svg class="play-icon" viewBox="0 0 24 24" fill="white">
+                    <circle cx="12" cy="12" r="11" fill="rgba(0,0,0,0.6)" stroke="white" stroke-width="1"/>
+                    <polygon points="10,8 17,12 10,16" fill="white"/>
+                </svg>
+            </div>` : ''}
         </div>
         <div class="film-content">
             <h3 class="film-title clickable-title" style="cursor: pointer; text-decoration: underline;" data-title="${film.title}" data-season="${film.season}">${film.title}</h3>
@@ -105,7 +111,6 @@ function createSearchResultCard(film) {
                 <p class="film-date">${film.date}</p>
                 <div class="film-genre">${film.genre}</div>
             </div>
-            <div class="film-season-badge">${film.season.replace("-", "/")}</div>
             <div class="film-badges">
                 <div class="badges-left">
                     ${
@@ -132,18 +137,24 @@ function createSearchResultCard(film) {
             ${film.note ? `<p class="film-note">${film.note}</p>` : ""}
             <p class="film-description">${film.description}</p>
             <p class="film-info">${film.info}</p>
-            <div class="film-actions">
+            <!-- <div class="film-actions">
                 ${film.trailer ? `<button class="trailer-btn" data-trailer="${film.trailer}" data-title="${film.title}">▶ Watch Trailer</button>` : ""}
-            </div>
+            </div> -->
         </div>
     `;
 
-    // Add trailer button click handler
+    // Add trailer button click handler (commented out - now using play overlay)
+    // if (film.trailer) {
+    //     const trailerBtn = card.querySelector('.trailer-btn');
+    //     trailerBtn.addEventListener('click', () => {
+    //         window.open(`https://www.youtube.com/watch?v=${film.trailer}`, '_blank');
+    //     });
+    // }
+
+    // Add play overlay click handler
     if (film.trailer) {
-        const trailerBtn = card.querySelector('.trailer-btn');
-        trailerBtn.addEventListener('click', () => {
-            // You'll need to implement the trailer modal opening here
-            // For now, just open YouTube directly
+        const playOverlay = card.querySelector('.play-overlay');
+        playOverlay.addEventListener('click', () => {
             window.open(`https://www.youtube.com/watch?v=${film.trailer}`, '_blank');
         });
     }
